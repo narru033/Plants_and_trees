@@ -1,0 +1,44 @@
+= form_for @user, :html=>{:class => 'form-horizontal', :id => 'form', :multipart => true } do |f|
+  .control-group
+    .control-label
+      Name*
+    .controls
+      = f.text_field :name, :class => 'text_field'
+  .control-group
+    .control-label
+      Email*
+    .controls
+      = f.text_field :email, :class => 'text_field'
+  .control-group
+    .control-label
+      Address*
+    .controls
+      = f.text_field :address, :class => 'text_field'
+  .control-group
+    .control-label
+      City*
+    .controls
+      = f.text_field :city, :class => 'text_field'
+  .control-group
+    .control-label
+      State*
+    .controls
+      = f.text_field :state, :class => 'text_field'
+  .control-group
+    .control-label
+      Zip Code
+    .controls
+      = f.text_field :zip_code, :class => 'text_field'
+  .control-group
+    .control-label
+      Country*
+    .controls
+      = f.country_select :country, priority: %w(IN US CA), :class => 'dropdown', prompt: 'Please select a country'
+  .control-group
+    = f.label :photos, :class => 'control-label'
+    .controls
+      = f.file_field :photo, :multiple =>:true, :class => 'file_field'
+  .form-actions
+    = f.submit 'Submit Details', :class => 'btn btn-primary'
+    = link_to 'Home', home_index_path, :class => 'btn btn-primary'
+    = link_to 'cancel', root_path, :class => 'btn'

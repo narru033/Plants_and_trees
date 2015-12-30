@@ -1,0 +1,36 @@
+<h1>Contributors in World</h1>
+<div id="map-container">
+  <div id="map-canvas">
+    <div style='width: 100%;'>
+      <div id="map" style='width: 100%; height: 500px;'></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  markers_json = <%=raw @hash.to_json %>;
+  handler = Gmaps.build('Google');
+  handler.buildMap({
+      provider: {
+        disableDefaultUI: true,
+        zoom: 1,
+        center: new google.maps.LatLng(0,0)
+        // pass in other Google Maps API options here
+      },
+      internal: {
+        id: 'map'
+      }
+    },
+    function(){
+      markers = handler.addMarkers(markers_json);
+      handler.bounds.extendWith(markers);
+      for (var i = 0; i < markers.length; i++) {
+        link = markers_json[i].link;
+        google.maps.event.addListener(markers[i].getServiceObject(), 'click', function(){
+          window.open(link);
+        })
+      }
+      handler.fitMapToBounds();
+    }
+  );
+</script>

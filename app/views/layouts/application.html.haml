@@ -1,0 +1,26 @@
+!!!
+%html
+  %head
+    %title Palnt A Tree
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+    = favicon_link_tag 'favicon.ico'
+    %script{:src => "//maps.google.com/maps/api/js?v=3.13&amp;sensor=false&amp;libraries=geometry", :type => "text/javascript"}
+    %script{:src => "//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js", :type => "text/javascript"}
+  %body
+    .container
+      %nav.navbar.navbar-default
+        .container-fluid
+          .navbar-header
+            %a.navbar-brand{:href => home_index_path}
+              %img{:alt => "Brand", :src => "/assets/map_logo.jpg", :style => "width:75px; height:75px;"}
+      - flash.each do |name, msg|
+        %div{:class => "alert alert-#{name == :notice ? "success" : "error"}"}
+          %a.close{"data-dismiss" => "alert"} ×
+          = content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String)
+
+    = yield
+    %br
+    %footer
+      %p Palnt A Tree &copy; Ruby Effect 2015
